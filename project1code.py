@@ -82,3 +82,19 @@ plt.title('Damped Harmonic Oscillator: Displacement over Time')
 plt.legend()
 plt.grid(True)
 plt.show()
+
+#Riemann method
+def riemann_sum(t, f):
+    total = 0.0
+    for i in range(len(f) - 1):
+        dt = t[i+1] - t[i]
+        total += f[i] * dt
+    return total
+
+# Trapezoidal Rule
+def trapezoidal_rule(t, f):
+    total = 0.0
+    for i in range(len(f) - 1):
+        dt = t[i+1] - t[i]
+        total += 0.5 * (f[i] + f[i+1]) * dt
+    return total
