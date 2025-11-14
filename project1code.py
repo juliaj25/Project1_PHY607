@@ -98,3 +98,29 @@ def trapezoidal_rule(t, f):
         dt = t[i+1] - t[i]
         total += 0.5 * (f[i] + f[i+1]) * dt
     return total
+
+ #Simpson's Rule
+def simpsons_rule(y, t):
+    n = len(y) - 1
+    if n % 2 == 1:
+        n -= 1
+        y = y[:n+1]
+        t = t[:n+1]
+    h = t[1] - t[0]   # uniform spacing
+    s = y[0] + y[-1] + 4*np.sum(y[1:n:2]) + 2*np.sum(y[2:n-1:2])
+    return s*h/3
+
+# Integrals
+W_riemann = riemann_sum(t_rk4, work_integrand)
+W_trap = trapezoidal_rule(t_rk4, work_integrand)
+W_simp = simpsons_rule(work_integrand, t_rk4)
+# SciPy equivalents
+W_trap_scipy = trapezoid(work_integrand, t_rk4)
+W_simp_scipy = simpson(work_integrand, t_rk4)
+
+
+print(f"Riemann sum: {W_riemann:.6f}")
+print(f"Trapezoidal: {W_trap:.6f}")
+print(f"Simpson's:   {W_simp:.6f}")
+print(f"SciPy trapezoidal: {W_trap_scipy:.6f}")
+print(f"SciPy Simpson's:   {W_simp_scipy:.6f}")
