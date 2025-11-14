@@ -1,13 +1,12 @@
-
-
 # Import packages
 
 import os
 import numpy as np
 import math as math
 from matplotlib import pyplot as plt
-
 from scipy.integrate import solve_ivp
+from scipy.integrate import trapezoid, simpson
+
 
 # Parameters
 m = 1.0     # mass
@@ -73,8 +72,9 @@ plt.figure(figsize=(12, 6))
 
 plt.plot(t_euler, y_euler[:, 0], 'r--', label='Euler method')
 
-plt.plot(t_rk4, y_rk4[:, 0], 'b-.', label='RK4 method')
-plt.plot(sol.t, sol.y[0], 'k', label='SciPy solve_ivp ')
+plt.plot(t_rk4, y_rk4[:, 0], color='black',  linestyle='-.',
+         linewidth=2.5, label='RK4 method')
+plt.plot(sol.t, sol.y[0], color='orange', label='SciPy solve_ivp ')
 
 plt.xlabel('Time [s]')
 plt.ylabel('Displacement [x]')
@@ -82,6 +82,11 @@ plt.title('Damped Harmonic Oscillator: Displacement over Time')
 plt.legend()
 plt.grid(True)
 plt.show()
+
+v = y_rk4[:,1] #get velocity
+work_integrand = -c * v**2  # F_d * dx = (-c*v)*dx/dt dt = -c*v^2 dt
+
+
 
 #Riemann method
 def riemann_sum(t, f):
@@ -124,3 +129,4 @@ print(f"Trapezoidal: {W_trap:.6f}")
 print(f"Simpson's:   {W_simp:.6f}")
 print(f"SciPy trapezoidal: {W_trap_scipy:.6f}")
 print(f"SciPy Simpson's:   {W_simp_scipy:.6f}")
+
