@@ -130,3 +130,12 @@ print(f"Simpson's:   {W_simp:.6f}")
 print(f"SciPy trapezoidal: {W_trap_scipy:.6f}")
 print(f"SciPy Simpson's:   {W_simp_scipy:.6f}")
 
+#Checking work-energy theorem
+x = y_rk4[:,0]
+
+K = 0.5 * m * v**2          
+U = 0.5 * k * x**2          
+E = K + U                   
+
+delta_E = E[-1] - E[0]
+print(f"ΔE = {delta_E:.6f}")
