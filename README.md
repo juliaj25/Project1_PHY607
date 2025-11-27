@@ -6,7 +6,7 @@ ODE and integral solver for a damped oscillator
 1. Clone the repository:
 
 ```bash
-git clone 
+git clone https://github.com/juliaj25/Project1_PHY607.git
 cd Project1_PHY607
 ```
 
